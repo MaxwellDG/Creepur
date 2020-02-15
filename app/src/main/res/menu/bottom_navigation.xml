@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navSettings"
+        android:title="Settings"
+        android:icon="@drawable/ic_person_outline_black_24dp"/>
+    <item
+        android:id="@+id/navHomePage"
+        android:title="Creepur"
+        android:icon="@drawable/ic_public_black_24dp"/>
+    <item
+        android:id="@+id/navBookmarks"
+        android:title="Bookmarks"
+        android:icon="@drawable/ic_folder_shared_black_24dp"/>
+</menu>

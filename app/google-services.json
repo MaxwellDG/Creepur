@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "736680770672",
+    "firebase_url": "https://creepur-5df51.firebaseio.com",
+    "project_id": "creepur-5df51",
+    "storage_bucket": "creepur-5df51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736680770672:android:a28c4be0e19bdf87a588b5",
+        "android_client_info": {
+          "package_name": "com.portfolio.creepur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736680770672-llk22lni8u9rndoofg4p122ql14t8cjl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.portfolio.creepur",
+            "certificate_hash": "ff5fe4cb8c9e43f8628329a1ed652581926a0464"
+          }
+        },
+        {
+          "client_id": "736680770672-a8blshb02vtr2gcolf4peq8tjcodmarp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5M0QDpgF8icVjpSYHgkxftZd28unXnZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736680770672-a8blshb02vtr2gcolf4peq8tjcodmarp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

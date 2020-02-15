@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Creepur</string>
+    <string name="mvvm_str">MVVM</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up Without Account</string>
+    <string name="sign_in_email">Sign in with Email</string>
+    <string name="sign_in_google">Sign in</string>
+    <string name="hint_email">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="text_copyright_claim">Copyright...</string>
+    <string name="login_instruction">Input your Imgur account information</string>
+    <string name="empty"></string>
+
+
+    <string name="terms_and_conditions">By clicking Sign Up, you agree to our <u>Terms and Conditions</u></string>
+    <string name="sample_terms_and_conditions"><![CDATA[A Terms and Conditions agreement, also known as a T&C
+    , Terms of Use or Terms of Service, is the legal backbone of the relationship between your mobile app and your users.
+     It sets forth clauses that embody the rules, requirements, restrictions and limitations that a user must agree to
+     in order to use your mobile app.]]></string>
+
+    <!-- homepage Strings -->
+    <string name="proText">Pro Status:</string>
+    <string name="membershipText">Date Created:</string>
+    <string name="creepNameHint">Input Username:</string>
+    <string name="creep_em">Creep \'Em</string>
+
+    <!-- Imgur API Strings -->
+    <string name="client_id">019800706a93797</string>
+    <string name="client_secret_id">1d5a84b534dbda927fb09262e8e5c1055634f317</string>
+    <string name="title_activity_main_activitygwsg">MainActivitygwsg</string>
+
+    <!-- Spinner Adapter Options -->
+    <string-array name="imgurApiOptionsArray">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+    <string name="title_activity_ghfjgv">ghfjgv</string>
+</resources>
