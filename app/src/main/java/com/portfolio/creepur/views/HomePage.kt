@@ -1,14 +1,17 @@
 package com.portfolio.creepur.views
 
 import android.annotation.SuppressLint
-import android.net.Uri
+import android.graphics.Outline
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewOutlineProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.portfolio.creepur.R
 import com.portfolio.creepur.models.Bookmark
@@ -16,9 +19,9 @@ import com.portfolio.creepur.models.Data
 import com.portfolio.creepur.models.UserAccountSignedIn
 import com.portfolio.creepur.viewmodels.HomePageViewModel
 import com.portfolio.creepur.viewmodels.HomePageViewModelFactory
+import com.portfolio.creepur.viewmodels.listeners.NavigationItemSelected
 import kotlinx.android.synthetic.main.activity_home_page.*
 import java.io.Serializable
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,24 +35,27 @@ class HomePage : AppCompatActivity(), Serializable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
+        // init
+        initViews()
+
         // setting LiveData and how to update
         viewModel.getUserInfo().observe(this, Observer<Data> {
             updateViews(it)
             viewModel.setActiveCreepData(it)})
 
-        // onClick listeners
-        fab.setOnClickListener { view ->
-            viewModel.addCreepToFirebase(Bookmark(creepUsername.text.toString(),
-                creepReputationPoints.text.toString().toInt(), creepReputation.text.toString(),
-                viewModel.getActiveCreepData()?.avatar.toString(), creepProStatus.text.toString().toBoolean() ))
-            Snackbar.make(view, "Bookmark added", Snackbar.LENGTH_LONG) }
-
-        CreepEmButton.setOnClickListener { viewModel.getACreepInfo(creepInputUser.text.toString(), this) }
-
         // if user signed in -> loads their info
         if(intent.getStringExtra("USERNAME") != null){
             viewModel.getACreepInfo(intent.getStringExtra("USERNAME")!!, this)
         }
+
+        // onClick listeners
+        fab.setOnClickListener { view ->
+            viewModel.addCreepToFirebase(Bookmark(creepUsername.text.toString(),
+                creepReputationPoints.text.toString().toInt(), creepReputation.text.toString(),
+                viewModel.getActiveCreepData()?.avatar.toString(), creepProStatus.text.toString().toBoolean()))
+            Snackbar.make(view, "Bookmark added", Snackbar.LENGTH_LONG) }
+        CreepEmButton.setOnClickListener { viewModel.getACreepInfo(creepInputUser.text.toString(), this) }
+        bottomNavigationView.setOnNavigationItemSelectedListener(NavigationItemSelected(this, intent.getSerializableExtra("ACCOUNT") as UserAccountSignedIn?))
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -63,8 +69,18 @@ class HomePage : AppCompatActivity(), Serializable {
         creepUsername.text = data.username
         creepReputationPoints.text = data.reputation.toString()
         creepReputation.text = data.reputation_name
-        val requestOptions = RequestOptions().placeholder(R.drawable.ic_person_outline_black_24dp)
-            .error(R.drawable.ic_person_outline_black_24dp)
-        Glide.with(this).applyDefaultRequestOptions(requestOptions).load(data.avatar.toString()).into(creepAvatar)
+
+        Glide.with(this).load(data.avatar.toString()).into(creepAvatar)
+    }
+
+    private fun initViews(){
+        constraintLayoutBottom.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View?, outline: Outline?) {
+                outline?.setRoundRect(0, 0, view!!.width, (view.height+15).toInt(), 25F)
+            }
+        }
+        constraintLayoutBottom.clipToOutline = true
+        bottomNavigationView.menu.getItem(1).isChecked = true
     }
 }
+

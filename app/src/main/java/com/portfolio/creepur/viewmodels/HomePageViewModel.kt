@@ -1,6 +1,7 @@
 package com.portfolio.creepur.viewmodels
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.portfolio.creepur.models.Bookmark
@@ -35,5 +36,16 @@ class HomePageViewModel(private val currentUser: UserAccountSignedIn?) : ViewMod
         if(currentUser != null) {
             Firebase.inputBookmarkToDatabase(bookmark, currentUser)
         }
+    }
+
+    fun startBookmarkActivity(context: Context){
+        val intent = Intent(context, Bookmark::class.java)
+        context.startActivity(intent)
+    }
+
+    fun startBookmarkActivity(context: Context, account: UserAccountSignedIn){
+        val intent = Intent(context, Bookmark::class.java)
+        intent.putExtra("ACCOUNT", account)
+        context.startActivity(intent)
     }
 }

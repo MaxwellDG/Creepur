@@ -2,38 +2,46 @@ package com.portfolio.creepur.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.portfolio.creepur.R
-import com.portfolio.creepur.repos.Firebase
+import com.portfolio.creepur.models.Bookmark
+import com.portfolio.creepur.models.UserAccountSignedIn
+import com.portfolio.creepur.viewmodels.BookmarkViewModelFactory
 import com.portfolio.creepur.viewmodels.BookmarksViewModel
 import com.portfolio.creepur.viewmodels.adapters.BookmarkRecycler
+import com.portfolio.creepur.viewmodels.listeners.NavigationItemSelected
 import kotlinx.android.synthetic.main.activity_book_marks.*
+import kotlinx.android.synthetic.main.activity_book_marks.bottomNavigationView
+import kotlinx.android.synthetic.main.activity_home_page.*
 
 class BookMarks : AppCompatActivity() {
 
-    private lateinit var adapter: BookmarkRecycler
-    private lateinit var viewModel: ViewModel
+    private val adapter by lazy { BookmarkRecycler() }
+    private val viewModel by lazy {val user: UserAccountSignedIn? = intent.getSerializableExtra("ACCOUNT") as UserAccountSignedIn?
+        ViewModelProvider(this, BookmarkViewModelFactory(user, adapter)).get(BookmarksViewModel::class.java) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_marks)
 
-        viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(BookmarksViewModel::class.java)
+        init()
 
-        initRecycler()
-        addDataset(adapter)
+        viewModel.getBookmarks().observe(this, Observer<ArrayList<Bookmark>> { adapter.setNewData(it) })
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(NavigationItemSelected(this, intent.getSerializableExtra("ACCOUNT") as UserAccountSignedIn))
     }
 
-    private fun addDataset(adapterParam: BookmarkRecycler){
-
-    }
-
-    private fun initRecycler(){
+    private fun init(){
         bookmarkRecycler.layoutManager = LinearLayoutManager(this)
-        adapter = BookmarkRecycler()
         bookmarkRecycler.adapter = this.adapter
+        viewModel.loadDataSet()
+        bottomNavigationView.menu.getItem(2).isChecked = true
     }
 }
+
+
+

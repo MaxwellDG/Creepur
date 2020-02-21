@@ -7,17 +7,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.firebase.ui.auth.data.model.User
+import com.portfolio.creepur.R
 import com.portfolio.creepur.models.DataResponse
 import com.portfolio.creepur.models.Data
-import com.portfolio.creepur.models.UserAccountSignedIn
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
-// Due to the size of the project, the repo and the Retrofit client are the same class //
 
 object RetrofitClient {
 
@@ -34,7 +31,7 @@ object RetrofitClient {
     }
 
     fun callForAnAccount(account: String, context: Context){
-        val call: Call<DataResponse> = apiCaller.getAccount(account, "019800706a93797") // TODO: this needs to be hidden and accessed in an annoying way
+        val call: Call<DataResponse> = apiCaller.getAccount(account, context.resources.getString(R.string.client_id))
         call.enqueue(object: Callback<DataResponse> {
             override fun onFailure(call: Call<DataResponse>, t: Throwable) {
                 Log.d( "TAG","There was an error with the API call: ${t.message} ${t.localizedMessage} ${t.cause} ")
@@ -47,15 +44,13 @@ object RetrofitClient {
                 } else {
                     val dataResponse: DataResponse? = response.body()
                     userData.value = dataResponse?.data
-                    Log.d("TAG", "Do we have access to the reputation number?: ${dataResponse?.data?.reputation.toString()}")
-                    Log.d( "TAG","userData has: ${userData.value?.reputation.toString()}")
                 }
             }
         })
     }
 
     fun callForAuth(username: String, context: Context){
-        val intent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://api.imgur.com/oauth2/authorize?client_id=019800706a93797&response_type=token"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://api.imgur.com/oauth2/authorize?client_id=019800706a93797&response_type=token"))
         context.startActivity(intent)
         }
 

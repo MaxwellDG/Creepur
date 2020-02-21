@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
 import com.portfolio.creepur.models.Bookmark
-import com.portfolio.creepur.models.Data
 import com.portfolio.creepur.models.UserAccountSignedIn
+import com.portfolio.creepur.viewmodels.adapters.BookmarkRecycler
 
 
 object Firebase {
@@ -14,42 +14,39 @@ object Firebase {
     private val fireBaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val fireBaseAccounts: DatabaseReference = fireBaseDatabase.getReference("accounts")
     private var activeUserAccountSignedIn: MutableLiveData<UserAccountSignedIn> = MutableLiveData()
+    private var activeUsersBookmarks: MutableLiveData<ArrayList<Bookmark>> = MutableLiveData()
 
 
-    // this is the only way to retrieve data from Firebase so this function doubles as
-    // initializing the listener as well as retrieving the user's account
-    fun initFirebaseListener(accountID: String) {
+    fun getUserAccountSignedIn(): LiveData<UserAccountSignedIn> = activeUserAccountSignedIn
+
+    fun getAccountByAccountId(accountID: String) {
+        val newRef: DatabaseReference = fireBaseDatabase.getReference("accounts/$accountID")
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // retrieving their account from database
-                val activeAccount: UserAccountSignedIn = dataSnapshot.child(accountID).getValue(UserAccountSignedIn::class.java)!!
-                activeUserAccountSignedIn.value = (activeAccount)
-                Log.d("TAG", "Database noted a change of: ${activeAccount?.userName}")
+                Log.d("TAG", "Called for account $accountID")
+                val list: ArrayList<UserAccountSignedIn> = arrayListOf()
+                list.add(dataSnapshot.getValue(UserAccountSignedIn::class.java)!!)
+                activeUserAccountSignedIn.postValue(list[0])
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.d("TAG", databaseError.message)
             }
         }
-        fireBaseAccounts.addValueEventListener(postListener)
+        newRef.addListenerForSingleValueEvent(postListener)
     }
 
-    fun getUserAccountSignedIn(): LiveData<UserAccountSignedIn> = this.activeUserAccountSignedIn // might use this later on a personal settings page
-
+    // creates child node based off of accountId
     fun inputToDatabase(account: UserAccountSignedIn) {
-        //locates proper child node by unique accountID and updates accordingly
-        val userHashMap: HashMap<String, UserAccountSignedIn> = HashMap()
-        userHashMap.put(account.accountId!!, account)
-        fireBaseAccounts.setValue(userHashMap)
+        fireBaseAccounts.child(account.accountId!!).setValue(account)
             .addOnCompleteListener { Log.d("TAG","Firebase updated.") }
             .addOnFailureListener { Log.d("TAG", "Firebase failed to be updated") }
-        activeUserAccountSignedIn.value = account
     }
 
     // updates a specified node with a specified value, without rewriting the entire object
     fun updateFirebaseAccount(account: UserAccountSignedIn, propertyToBeUpdated: String, newPropertyValue: String){
         val personalAccountRef: DatabaseReference = fireBaseAccounts.child(account.accountId!!)
-        val theUpdate: MutableMap<String, Any> = HashMap()
-        theUpdate[propertyToBeUpdated] = newPropertyValue
+        val theUpdate = mapOf(propertyToBeUpdated to newPropertyValue)
         personalAccountRef.updateChildren(theUpdate)
     }
 
@@ -58,16 +55,46 @@ object Firebase {
         fireBaseAccounts.child(account.accountId.toString()).removeValue()
     }
 
-    fun getBookMarks(): ArrayList<Bookmark>?{
-        return null
+
+
+
+
+
+
+
+
+    // Bookmark functions
+
+    fun getActiveUsersBookmarks(): LiveData<ArrayList<Bookmark>> = activeUsersBookmarks
+
+    fun getBookMarksFromDatabase(accountId: String, adapter: BookmarkRecycler){
+        val bookmarks: ArrayList<Bookmark> = arrayListOf()
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // retrieving their bookmarks from database
+                bookmarks.clear()
+                for(snapshot: DataSnapshot in dataSnapshot.children){
+                    bookmarks.add(snapshot.getValue(Bookmark::class.java)!!)
+                }
+                Log.d("TAG", "doot doot")
+                activeUsersBookmarks.postValue(bookmarks)
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("TAG", databaseError.message)
+            }
+        }
+        val firebaseAccountBookmarksRef = fireBaseAccounts.child(accountId).child("bookmarks")
+        firebaseAccountBookmarksRef.addValueEventListener(postListener)
     }
 
     fun inputBookmarkToDatabase(bookmark: Bookmark, account: UserAccountSignedIn){
-        val personalAccountRef: DatabaseReference = fireBaseAccounts.child("${account.accountId.toString()}/bookmarks")
+        val personalAccountRef: DatabaseReference = fireBaseAccounts.child("${account.accountId}")
+        personalAccountRef.child("bookmarks").child(bookmark.username).setValue(bookmark)
     }
 
-    fun postFirebaseAccounts(account: MutableLiveData<List<Data>>) {
-        // TODO: post this list of data to the recyclerView's LiveData property (make sure that it gets fed all the way down the line to here first)
+    fun deleteBookmarkFromFirebase(bookmark: Bookmark, account: UserAccountSignedIn){
+        val personalAccountRef: DatabaseReference = fireBaseAccounts.child("${account.accountId}/bookmarks")
+        personalAccountRef.child(bookmark.username).removeValue()
     }
 }
 

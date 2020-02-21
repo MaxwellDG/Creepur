@@ -1,28 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorAccent">#FFFFFF</color>
-    <color name="colorPrimary">#ED1D24</color>
-    <color name="colorPrimaryDark">#8E1116</color>
-    <color name="colorPrimaryVariant">#8E1116</color>
-    <color name="colorSecondary">#8E1116</color>
-    <color name="colorSecondaryDark">#8E1116</color>
-    <color name="colorSecondaryVariant">#8E1116</color>
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorSurface">#FFFFFF</color>
-    <color name="colorError">#ED1D24</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
-    <color name="colorOnSecondary">#FFFFFF</color>
-    <color name="colorOnBackground">#FFFFFF</color>
-    <color name="colorOnSurface">#FFFFFF</color>
-    <color name="colorOnError">#ED1D24</color>
-    <color name="colorImgurLogo">#89C623</color>
+    <color name="colorAccent">#89C623</color>
+    <color name="colorOtherGreenAccent">#5EA69C</color>
+    <color name="colorPrimary">#643C91E6</color>
+    <color name="colorPrimaryDark">#64342E37</color>
+    <color name="colorWhiteShade">#fafffd</color>
+    <color name="colorFabs">#5EA69C</color>
+    <color name="colorIndicators">#60A65C</color>
+    <color name="colorWhiteLowAlpha">#96FAFFFD</color>
 
-    <color name="colorMarvelRed">#ED1D24</color>
-    <color name="colorMarvelWhite">#FFFFFF</color>
 
-    <color name="colorMarvelBlue">#518CCA</color>
     <color name="colorCardview">#E6E6E6</color>
     <color name="colorTextBlack">#B2000000</color>
-    <color name="colorTextBlue">#03A9F4</color>
+    <color name="colorTextBlue">#5EA69C</color>
     <color name="colorTransparent">#00FFFFFF</color>
 </resources>

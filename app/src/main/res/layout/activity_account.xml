@@ -4,26 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blur"
-    tools:context=".views.BookMarks">
+    tools:context=".views.Account">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bookmarkRecycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <Button
+        android:id="@+id/settingsLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/settingsDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsLogout" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         app:itemIconTint="@drawable/bottomnav_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

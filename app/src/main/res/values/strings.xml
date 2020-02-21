@@ -22,7 +22,7 @@
     <string name="proText">Pro Status:</string>
     <string name="membershipText">Date Created:</string>
     <string name="creepNameHint">Input Username:</string>
-    <string name="creep_em">Creep \'Em</string>
+    <string name="creep_em">Creep</string>
 
     <!-- Imgur API Strings -->
     <string name="client_id">019800706a93797</string>

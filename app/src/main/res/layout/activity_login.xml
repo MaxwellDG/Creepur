@@ -11,10 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/material_toolbar_height"
         android:layout_gravity="top"
-        android:background="@color/colorMarvelBlue"
+        android:background="@color/colorOtherGreenAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.google.android.material.appbar.AppBarLayout>
+        app:layout_constraintTop_toTopOf="parent">
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -39,7 +40,7 @@
                 android:layout_width="@dimen/signin_button_dimension"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                android:backgroundTint="@color/colorImgurLogo"
+                android:backgroundTint="@color/colorAccent"
                 android:text="@string/sign_in_google"
                 android:textColor="@color/common_google_signin_btn_text_light"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="@color/colorImgurLogo"
+                android:backgroundTint="@color/colorAccent"
                 android:ems="10"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
@@ -65,9 +66,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="@color/colorImgurLogo"
-                android:ems="10"
+                android:backgroundTint="@color/colorAccent"
                 android:hint="@string/hint_password"
+                android:ems="10"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="@+id/editTextUser"
                 app:layout_constraintStart_toStartOf="@+id/editTextUser"
@@ -90,9 +91,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="@color/colorMarvelBlue"
+                android:backgroundTint="@color/colorOtherGreenAccent"
                 android:text="@string/sign_up"
-                android:textColor="@color/colorMarvelWhite"
+                android:textColor="@color/colorWhiteShade"
                 app:layout_constraintEnd_toEndOf="@+id/buttonSignin"
                 app:layout_constraintStart_toStartOf="@+id/buttonSignin"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSignin" />
@@ -107,27 +108,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSignIn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/textViewCopyright"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_copyright_claim"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.299" />
-    <TextView
-        android:id="@+id/textViewTermsAndConditions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/terms_and_conditions"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCopyright"
-        app:layout_constraintVertical_bias="0.168" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
