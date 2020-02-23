@@ -3,11 +3,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homePageConstraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blur"
+    android:background="@drawable/gradient_backgrounds"
     tools:context=".views.HomePage">
 
+   <FrameLayout
+        android:id="@+id/fragmentSpace"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:itemIconTint="@drawable/bottomnav_selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutBottom"
@@ -26,13 +46,13 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_add_circle_white_24dp"
-            app:tint="@android:color/white"
-            app:elevation="0dp"
             app:backgroundTint="@color/colorIndicators"
+            app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/CreepEmButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/CreepEmButton" />
+            app:layout_constraintTop_toTopOf="@+id/CreepEmButton"
+            app:srcCompat="@drawable/ic_add_circle_white_24dp"
+            app:tint="@android:color/white" />
 
         <Button
             android:id="@+id/CreepEmButton"
@@ -55,10 +75,10 @@
             app:layout_constraintStart_toStartOf="@+id/CreepEmButton" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/creepScrollUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toTopOf="@+id/creepSpinnerOptionsText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -69,142 +89,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:visibility="gone"
+            android:backgroundTint="@color/colorIndicators"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/creepInputUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/creepSpinnerOptionsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Creeping options:"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="28dp"
             android:textStyle="bold"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/spinner"
             app:layout_constraintEnd_toEndOf="@+id/spinner"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/spinner" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/creepUsername"
-        style="@style/homePageTextWhite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/creepReputationPoints"
-        style="@style/homePageTextWhite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/creepReputation"
-        app:layout_constraintStart_toStartOf="@+id/creepReputation"
-        app:layout_constraintTop_toBottomOf="@+id/creepReputation" />
-
-    <TextView
-        android:id="@+id/creepReputation"
-        style="@style/homePageTextWhite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creepUsername" />
-
-    <TextView
-        android:id="@+id/creepProStatus"
-        style="@style/homePageTextWhite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
-        app:layout_constraintEnd_toEndOf="@+id/creepText"
-        app:layout_constraintStart_toStartOf="@+id/creepText"
-        app:layout_constraintTop_toBottomOf="@+id/creepText"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/creepText"
-        style="@style/homePageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/proText"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creepReputationPoints" />
-
-    <TextView
-        android:id="@+id/textView4"
-        style="@style/homePageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/membershipText"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creepReputationPoints" />
-
-    <TextView
-        android:id="@+id/creepDateCreated"
-        style="@style/homePageTextWhite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:itemIconTint="@drawable/bottomnav_selector"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/homepageCard"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        app:cardCornerRadius="35dp"
-        app:cardElevation="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
-        app:layout_constraintEnd_toEndOf="@+id/creepReputationPoints"
-        app:layout_constraintStart_toStartOf="@+id/creepReputationPoints"
-        app:layout_constraintTop_toTopOf="@+id/creepText"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ImageView
-            android:id="@+id/creepAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

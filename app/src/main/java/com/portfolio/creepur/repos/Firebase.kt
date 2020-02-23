@@ -13,6 +13,7 @@ object Firebase {
 
     private val fireBaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val fireBaseAccounts: DatabaseReference = fireBaseDatabase.getReference("accounts")
+
     private var activeUserAccountSignedIn: MutableLiveData<UserAccountSignedIn> = MutableLiveData()
     private var activeUsersBookmarks: MutableLiveData<ArrayList<Bookmark>> = MutableLiveData()
 

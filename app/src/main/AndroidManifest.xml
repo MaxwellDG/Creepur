@@ -17,7 +17,7 @@
         <activity android:name=".views.BookMarks" />
         <activity
             android:name=".views.HomePage"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".views.LoginActivity">
             <intent-filter>

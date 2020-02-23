@@ -5,3 +5,7 @@ package com.portfolio.creepur.models
 class DataResponse {
     var data: Data? = null
 }
+
+class DataResponseImages{
+    var data: Array<DataImages?>? = null
+}

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.portfolio.creepur.R
 import com.portfolio.creepur.models.Bookmark
@@ -12,6 +13,7 @@ import com.portfolio.creepur.models.UserAccountSignedIn
 import com.portfolio.creepur.viewmodels.BookmarkViewModelFactory
 import com.portfolio.creepur.viewmodels.BookmarksViewModel
 import com.portfolio.creepur.viewmodels.adapters.BookmarkRecycler
+import com.portfolio.creepur.viewmodels.adapters.BookmarkRecyclerItemTouch
 import com.portfolio.creepur.viewmodels.listeners.NavigationItemSelected
 import kotlinx.android.synthetic.main.activity_book_marks.*
 import kotlinx.android.synthetic.main.activity_book_marks.bottomNavigationView
@@ -38,6 +40,8 @@ class BookMarks : AppCompatActivity() {
     private fun init(){
         bookmarkRecycler.layoutManager = LinearLayoutManager(this)
         bookmarkRecycler.adapter = this.adapter
+        val item = ItemTouchHelper(BookmarkRecyclerItemTouch(adapter))
+        item.attachToRecyclerView(bookmarkRecycler)
         viewModel.loadDataSet()
         bottomNavigationView.menu.getItem(2).isChecked = true
     }

@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
             viewModel.inputToFirebase(user)
             viewModel.setSharedPrefs(user.userName!!, user.accountId!!)
             viewModel.startHomePageActivity(this, user.userName, user)
+            // set global usage when user signing in
             MainApplication.currentUser = user
         }
     }
@@ -34,19 +35,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // automatically login user if possible
-        // TODO: maybe put this in onStart? lol. Just something before onCreate so it doesn't popup for a split second. And if this doesn't work here, just do it all in the actual viewModel class.
-        // TODO: only hiccup is the LifeCycleOwner. Maybe try casting context as LifeCycleOwner? I dunno. Stackoverflow it
         if (viewModel.checkSharedPrefs()) {
-            viewModel.getUserAccountLiveData().observe(
-                this,
-                Observer<UserAccountSignedIn> {
-                    viewModel.startHomePageActivity(
-                        this,
-                        it.userName,
-                        it
-                    )
+            viewModel.getUserAccountLiveData().observe(this, Observer<UserAccountSignedIn> {
+                    viewModel.startHomePageActivity(this, it.userName, it)
+                // set global usage when user signs in with SharedPrefs
                 MainApplication.currentUser = it
-                })
+            })
             viewModel.callFirebaseForUserData()
         }
 

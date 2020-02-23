@@ -1,5 +1,6 @@
 package com.portfolio.creepur.views
 
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -31,5 +32,9 @@ class Account : AppCompatActivity() {
 
     private fun init(){
         bottomNavigationView.menu.getItem(0).isChecked = true
+        val animations: AnimationDrawable = accountConstraint.background as AnimationDrawable
+        animations.setEnterFadeDuration(4000)
+        animations.setExitFadeDuration(4000)
+        animations.start()
     }
 }

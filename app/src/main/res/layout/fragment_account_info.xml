@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_backgrounds"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/creepUsername"
+        style="@style/homePageTextWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/creepReputationPoints"
+        style="@style/homePageTextWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/creepReputation"
+        app:layout_constraintStart_toStartOf="@+id/creepReputation"
+        app:layout_constraintTop_toBottomOf="@+id/creepReputation" />
+
+    <TextView
+        android:id="@+id/creepReputation"
+        style="@style/homePageTextWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creepUsername" />
+
+    <TextView
+        android:id="@+id/creepProStatus"
+        style="@style/homePageTextWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
+        app:layout_constraintEnd_toEndOf="@+id/creepText"
+        app:layout_constraintStart_toStartOf="@+id/creepText"
+        app:layout_constraintTop_toBottomOf="@+id/creepText"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/creepText"
+        style="@style/homePageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/proText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creepReputationPoints" />
+
+    <TextView
+        android:id="@+id/creepText2"
+        style="@style/homePageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/membershipText"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creepReputationPoints" />
+
+    <TextView
+        android:id="@+id/creepDateCreated"
+        style="@style/homePageTextWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
+        app:layout_constraintEnd_toEndOf="@+id/creepText2"
+        app:layout_constraintStart_toStartOf="@+id/creepText2"
+        app:layout_constraintTop_toBottomOf="@+id/creepText2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/homepageCard"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
+        app:layout_constraintEnd_toEndOf="@+id/creepReputationPoints"
+        app:layout_constraintStart_toStartOf="@+id/creepReputationPoints"
+        app:layout_constraintTop_toTopOf="@+id/creepText"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/creepAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

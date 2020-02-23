@@ -1,15 +1,7 @@
 package com.portfolio.creepur.viewmodels.adapters
 
-import android.view.View
-import android.widget.AdapterView
+import android.content.Context
+import android.widget.ArrayAdapter
 
-interface SpinnerAdapter : AdapterView.OnItemSelectedListener {
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class SpinnerAdapter(context: Context, resource: Int) : ArrayAdapter<String>(context, resource) {
 }

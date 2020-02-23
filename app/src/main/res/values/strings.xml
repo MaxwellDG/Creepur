@@ -2,21 +2,13 @@
     <string name="app_name">Creepur</string>
     <string name="mvvm_str">MVVM</string>
     <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up Without Account</string>
-    <string name="sign_in_email">Sign in with Email</string>
-    <string name="sign_in_google">Sign in</string>
+    <string name="sign_up">Sign In Without Account</string>
+    <string name="sign_in_google">Sign in with Imgur</string>
     <string name="hint_email">Username</string>
     <string name="hint_password">Password</string>
-    <string name="text_copyright_claim">Copyright...</string>
+    <string name="text_copyright_claim">Copyright…</string>
     <string name="login_instruction">Input your Imgur account information</string>
-    <string name="empty"></string>
-
-
-    <string name="terms_and_conditions">By clicking Sign Up, you agree to our <u>Terms and Conditions</u></string>
-    <string name="sample_terms_and_conditions"><![CDATA[A Terms and Conditions agreement, also known as a T&C
-    , Terms of Use or Terms of Service, is the legal backbone of the relationship between your mobile app and your users.
-     It sets forth clauses that embody the rules, requirements, restrictions and limitations that a user must agree to
-     in order to use your mobile app.]]></string>
+    <string name="empty"> </string>
 
     <!-- homepage Strings -->
     <string name="proText">Pro Status:</string>
@@ -31,14 +23,14 @@
 
     <!-- Spinner Adapter Options -->
     <string-array name="imgurApiOptionsArray">
-        <item>Mercury</item>
-        <item>Venus</item>
+        <item>---- No Login Required ----</item>
+        <item>Account Info</item>
+        <item>Account Images</item>
+        <item>---- Login Required ----</item>
         <item>Earth</item>
         <item>Mars</item>
         <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+
     </string-array>
     <string name="title_activity_ghfjgv">ghfjgv</string>
 </resources>

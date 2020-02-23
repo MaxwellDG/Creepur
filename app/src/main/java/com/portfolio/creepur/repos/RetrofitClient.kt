@@ -7,11 +7,15 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.portfolio.creepur.R
 import com.portfolio.creepur.models.DataResponse
 import com.portfolio.creepur.models.Data
+import com.portfolio.creepur.models.DataImages
+import com.portfolio.creepur.models.DataResponseImages
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -23,6 +27,7 @@ object RetrofitClient {
     private var apiCaller: ImgurAPICalls = client.create(ImgurAPICalls::class.java)
 
     private val userData: MutableLiveData<Data> = MutableLiveData()
+    private val userImages: MutableLiveData<ArrayList<DataImages>> = MutableLiveData()
 
 
 
@@ -43,7 +48,32 @@ object RetrofitClient {
                     Toast.makeText(context, "API callback returned an error: ${response.code()} + ${response.message()}", Toast.LENGTH_SHORT).show()
                 } else {
                     val dataResponse: DataResponse? = response.body()
-                    userData.value = dataResponse?.data
+                    userData.postValue( dataResponse?.data )
+                }
+            }
+        })
+    }
+
+    fun getUserImages(): LiveData<ArrayList<DataImages>>{
+        return this.userImages
+    }
+
+    fun callForAnAccountsImages(account: String, context: Context){
+        val call: Call<DataResponseImages> = apiCaller.getImages(account, 0, context.resources.getString(R.string.client_id))
+        call.enqueue(object: Callback<DataResponseImages> {
+            override fun onFailure(call: Call<DataResponseImages>, t: Throwable) {
+                Log.d( "TAG","There was an error with the API call: ${t.message} ${t.localizedMessage} ${t.cause} ")
+                Toast.makeText(context, "There was an error with the API call", Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<DataResponseImages>, response: Response<DataResponseImages>) {
+                val dataResponse: DataResponseImages? = response.body()
+                if (dataResponse?.data != null && dataResponse.data != null){
+                    val list: ArrayList<DataImages> = arrayListOf()
+                    dataResponse.data!!.forEach { thing ->
+                        val fullImage = DataImages(thing!!.title, thing.link, thing.ups, thing.downs)
+                        list.add(fullImage)
+                    }
+                    userImages.postValue(list)
                 }
             }
         })

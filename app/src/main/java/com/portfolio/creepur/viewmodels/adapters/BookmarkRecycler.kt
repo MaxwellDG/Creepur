@@ -43,17 +43,21 @@ class BookmarkRecycler : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.bookmarkList.addAll(list)
         notifyDataSetChanged()
     }
+
+    fun deleteItem(position: Int){
+        Firebase.deleteBookmarkFromFirebase(bookmarkList[position], MainApplication.currentUser!!)
+        bookmarkList.removeAt(position)
+        notifyDataSetChanged()
+    }
 }
 
 class BookmarkViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
 
-    private val layout: ConstraintLayout = itemView.bookmarkConstraint
     private val name: TextView = itemView.bookmarkName
     private val rep: TextView = itemView.bookmarkRepNumber
     private val repName: TextView = itemView.bookmarkRep
     private val pro: TextView = itemView.bookmarkPro
     private val image: ImageView = itemView.bookmarkAvatar
-    private val x: TextView = itemView.buttonX
 
     // annotations literally just to be able to capitalize something... lol
     @SuppressLint("DefaultLocale")
@@ -63,11 +67,9 @@ class BookmarkViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         rep.text = bookmark.reputation.toString()
         repName.text = bookmark.reputationName
         pro.text = bookmark.pro.toString().capitalize(Locale.US)
-        layout.setOnClickListener { x.visibility = if(x.visibility == View.VISIBLE) View.GONE else View.VISIBLE }
-        x.setOnClickListener { Firebase.deleteBookmarkFromFirebase(bookmark, MainApplication.currentUser!! ) }
 
         val requestOptions = RequestOptions().placeholder(R.drawable.ic_person_outline_black_24dp)
             .error(R.drawable.ic_person_outline_black_24dp)
-        Glide.with(itemView.context).applyDefaultRequestOptions(requestOptions).load(bookmark.avatar).into(image)
+        Glide.with(itemView.context).applyDefaultRequestOptions(requestOptions).load(bookmark.avatar).into(image) //TODO: check if setDefaultRequestOptions is better
     }
 }

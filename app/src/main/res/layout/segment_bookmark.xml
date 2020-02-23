@@ -18,67 +18,57 @@
         style="@android:style/Widget.Material.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="0dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/colorTransparent"
+        android:padding="0dp"
+        android:stateListAnimator="@null"
         android:text="X"
         android:textColor="@color/design_default_color_error"
         android:textSize="18sp"
         android:visibility="invisible"
-        android:padding="0dp"
-        android:layout_margin="0dp"
-        android:stateListAnimator="@null"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/bookmarkName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/bookmarkPro"
         app:layout_constraintTop_toTopOf="@+id/bookmarkName" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/bookmarkAvatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        app:cardCornerRadius="35dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/colorImgurLightGray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/bookmarkAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
         android:id="@+id/bookmarkName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/bookmarkAvatar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bookmarkRep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="TextView"
         android:textAlignment="viewStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bookmarkRepNumber"
-        app:layout_constraintStart_toEndOf="@+id/cardView2" />
+        app:layout_constraintStart_toEndOf="@+id/bookmarkAvatar" />
 
     <TextView
         android:id="@+id/bookmarkRepNumber"
