@@ -1,5 +1,6 @@
 package com.portfolio.creepur.viewmodels.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,24 +28,38 @@ class ImagesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is ImagesViewHolder -> holder.bind(imagesList[position])
         }
     }
+
+    fun setData(list: ArrayList<DataImages>?){
+        imagesList.clear()
+        if(list != null) {
+            this.imagesList.addAll(list)
+        }
+        notifyDataSetChanged()
+    }
 }
 
 class ImagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     private var image: ImageView = itemView.fragmentAccountImageImage
+    private var imageSubstitute: TextView = itemView.fragmentAccountImageSubstituteImage
     private var ups: TextView = itemView.fragmentAccountImagesUps
     private var downs: TextView = itemView.fragmentAccountImagesDowns
     private var title: TextView = itemView.fragmentAccountImageTitle
 
-    fun bind(dataImage: DataImages){
+    fun bind(dataImage: DataImages?){
+        // loads image if post is a single image. Otherwise, a hyperlink is posted with the full post
+        if(dataImage?.link?.endsWith("png")!! || dataImage.link.endsWith("jpeg") || dataImage.link.endsWith("jpg")) {
+            image.visibility = View.VISIBLE
+            imageSubstitute.visibility = View.INVISIBLE
+            Glide.with(itemView.context).load(dataImage.link).into(image)
+        } else {
+            image.visibility = View.INVISIBLE
+            imageSubstitute.visibility = View.VISIBLE
+            imageSubstitute.text = dataImage.link
+        }
+        // filling the other fields with data
         ups.text = dataImage.ups.toString()
         downs.text = dataImage.downs.toString()
-        title.text = dataImage.title.toString()
-
-        val requestOptions = RequestOptions().placeholder(R.drawable.ic_person_outline_black_24dp)
-            .error(R.drawable.ic_person_outline_black_24dp)
-        Glide.with(itemView.context).applyDefaultRequestOptions(requestOptions).load(dataImage.link).into(image)
+        title.text = dataImage.title
     }
-
-
 }

@@ -9,3 +9,11 @@ class DataResponse {
 class DataResponseImages{
     var data: Array<DataImages?>? = null
 }
+
+class DataResponseFavorites{
+    var data: Array<DataImages?>? = null
+}
+
+class DataResponseComments{
+    var data: Array<DataImages?>? = null
+}

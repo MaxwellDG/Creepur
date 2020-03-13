@@ -2,6 +2,7 @@ package com.portfolio.creepur.repos
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
@@ -9,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.portfolio.creepur.R
+import com.portfolio.creepur.core.MainApplication
 import com.portfolio.creepur.models.DataResponse
 import com.portfolio.creepur.models.Data
 import com.portfolio.creepur.models.DataImages
@@ -40,12 +42,10 @@ object RetrofitClient {
         call.enqueue(object: Callback<DataResponse> {
             override fun onFailure(call: Call<DataResponse>, t: Throwable) {
                 Log.d( "TAG","There was an error with the API call: ${t.message} ${t.localizedMessage} ${t.cause} ")
-                Toast.makeText(context, "There was an error with the API call", Toast.LENGTH_SHORT).show()
             }
             override fun onResponse(call: Call<DataResponse>, response: retrofit2.Response<DataResponse>) {
                 if(!response.isSuccessful){
                     Log.d("TAG", "API callback returned an error: ${response.code()} + ${response.message()}")
-                    Toast.makeText(context, "API callback returned an error: ${response.code()} + ${response.message()}", Toast.LENGTH_SHORT).show()
                 } else {
                     val dataResponse: DataResponse? = response.body()
                     userData.postValue( dataResponse?.data )
@@ -63,14 +63,13 @@ object RetrofitClient {
         call.enqueue(object: Callback<DataResponseImages> {
             override fun onFailure(call: Call<DataResponseImages>, t: Throwable) {
                 Log.d( "TAG","There was an error with the API call: ${t.message} ${t.localizedMessage} ${t.cause} ")
-                Toast.makeText(context, "There was an error with the API call", Toast.LENGTH_SHORT).show()
             }
             override fun onResponse(call: Call<DataResponseImages>, response: Response<DataResponseImages>) {
                 val dataResponse: DataResponseImages? = response.body()
                 if (dataResponse?.data != null && dataResponse.data != null){
                     val list: ArrayList<DataImages> = arrayListOf()
                     dataResponse.data!!.forEach { thing ->
-                        val fullImage = DataImages(thing!!.title, thing.link, thing.ups, thing.downs)
+                        val fullImage = DataImages(thing!!.account_url, thing.title, thing.link, thing.ups, thing.downs)
                         list.add(fullImage)
                     }
                     userImages.postValue(list)

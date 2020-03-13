@@ -10,7 +10,12 @@
     <color name="colorWhiteLowAlpha">#96FAFFFD</color>
     <color name="colorImgurGray">#2B2B2B</color>
     <color name="colorImgurLightGray">#C7E0D8</color>
+    <color name="colorGrad1">#5a9395</color>
+    <color name="colorGrad2">#ddabb6</color>
+    <color name="colorGrad3">#f3544f</color>
 
+    <color name="ups">#56ba5c</color>
+    <color name="downs">#f03333</color>
 
     <color name="colorCardview">#E6E6E6</color>
     <color name="colorTextBlack">#B2000000</color>

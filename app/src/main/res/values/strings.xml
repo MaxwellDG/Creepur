@@ -19,7 +19,6 @@
     <!-- Imgur API Strings -->
     <string name="client_id">019800706a93797</string>
     <string name="client_secret_id">1d5a84b534dbda927fb09262e8e5c1055634f317</string>
-    <string name="title_activity_main_activitygwsg">MainActivitygwsg</string>
 
     <!-- Spinner Adapter Options -->
     <string-array name="imgurApiOptionsArray">
@@ -27,10 +26,10 @@
         <item>Account Info</item>
         <item>Account Images</item>
         <item>---- Login Required ----</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-
+        <item>Your Favourites</item>
+        <item>Your Comments</item>
     </string-array>
-    <string name="title_activity_ghfjgv">ghfjgv</string>
+
+    <string name="proStatus">Pro Status:</string>
+    <string name="dateCreated">Date Created:</string>
 </resources>

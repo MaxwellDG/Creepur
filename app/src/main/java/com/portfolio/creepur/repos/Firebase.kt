@@ -25,7 +25,6 @@ object Firebase {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // retrieving their account from database
-                Log.d("TAG", "Called for account $accountID")
                 val list: ArrayList<UserAccountSignedIn> = arrayListOf()
                 list.add(dataSnapshot.getValue(UserAccountSignedIn::class.java)!!)
                 activeUserAccountSignedIn.postValue(list[0])
@@ -77,7 +76,6 @@ object Firebase {
                 for(snapshot: DataSnapshot in dataSnapshot.children){
                     bookmarks.add(snapshot.getValue(Bookmark::class.java)!!)
                 }
-                Log.d("TAG", "doot doot")
                 activeUsersBookmarks.postValue(bookmarks)
             }
             override fun onCancelled(databaseError: DatabaseError) {

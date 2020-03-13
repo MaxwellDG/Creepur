@@ -23,10 +23,11 @@ class Account : AppCompatActivity() {
 
         init()
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(NavigationItemSelected(this, intent.getSerializableExtra("ACCOUNT") as UserAccountSignedIn))
+        bottomNavigationView.setOnNavigationItemSelectedListener(NavigationItemSelected
+            (bottomNavigationView, this, intent?.getSerializableExtra("ACCOUNT") as UserAccountSignedIn?))
 
         settingsLogout.setOnClickListener { viewModel.logout(this) }
-        settingsDelete.setOnClickListener { Firebase.deleteFirebaseAccount(intent.getSerializableExtra("ACCOUNT") as UserAccountSignedIn)
+        settingsDelete.setOnClickListener { viewModel.deleteFirebaseAccount(intent?.getSerializableExtra("ACCOUNT") as UserAccountSignedIn?)
             viewModel.logout(this)}
     }
 

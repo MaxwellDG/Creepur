@@ -4,23 +4,42 @@ import android.util.Log
 import android.view.MotionEvent
 
 import android.view.View
+import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.portfolio.creepur.viewmodels.listeners.GestureDetector.ListenerForSwipe.Companion.DIRECTION_DOWN
+import com.portfolio.creepur.viewmodels.listeners.GestureDetector.ListenerForSwipe.Companion.DIRECTION_UP
+import kotlinx.android.synthetic.main.activity_home_page.view.*
 
-class GestureDetector(private val listener: AnimationPromptListener) : View.OnTouchListener {
+class GestureDetector(private val listener: ListenerForSwipe) : View.OnTouchListener {
+
+    interface ListenerForSwipe {
+        companion object{
+            const val DIRECTION_UP = 0
+            const val DIRECTION_DOWN = 1
+        }
+        fun changeUI(direction: Int){
+        }
+    }
 
     private var currentPointer: Int? = null
+    private var startingPointerY: Float? = null
+    private lateinit var viewGroup: ViewGroup
 
 
     override fun onTouch(p0: View?, motionEvent: MotionEvent?): Boolean {
         // maybe add a scaleDetector in here too? Apparently it listens to this motionEvent and gauges whether it should also start doing its job //
+        viewGroup = p0 as ViewGroup
+        val conLayoutBottom: ConstraintLayout = viewGroup.constraintLayoutBottom
         var lastTouchX: Float?
         var lastTouchY: Float?
         when (motionEvent?.action) {
             MotionEvent.ACTION_DOWN -> {
                 currentPointer = motionEvent.getPointerId(0)
-                motionEvent.actionIndex.also { pointer ->
+                motionEvent.actionIndex.also { _ ->
                     // Starting variables for where the touch is at the moment
                     lastTouchX = motionEvent.rawX
                     lastTouchY = motionEvent.rawY
+                    startingPointerY = lastTouchY
                     Log.d("TAG", "Pointer went down at X: $lastTouchX and Y: $lastTouchY")
                 }
             }
@@ -31,20 +50,16 @@ class GestureDetector(private val listener: AnimationPromptListener) : View.OnTo
                         motionEvent.rawX to motionEvent.rawY
                     }
 
-                if(p0 != null && y < p0.y){
-                    //listener.callback()
-                    Log.d("TAG", "Gone above")
-                } else if(p0 != null && y > p0.y + p0.height){
-                    //TODO: the above line is probably wrong since things will be changing
-                    //listener.callBack()
-                    Log.d("TAG", "Gone below")
+                // Checking for correct swipe movements and changing UI if so
+                if (startingPointerY != null) {
+                    if (startingPointerY!! > conLayoutBottom.y && y < conLayoutBottom.y && !isUiExpanded()) {
+                        Log.d("TAG", "Triggered way up.")
+                        listener.changeUI(DIRECTION_UP)
+                    } else if (startingPointerY!! < conLayoutBottom.y && y > conLayoutBottom.y && isUiExpanded()){
+                        Log.d("TAG", "Triggered way down.")
+                        listener.changeUI(DIRECTION_DOWN)
+                    }
                 }
-
-                //TODO: everything is gucci except this part.
-
-                // mPosX += x - lastTouchX
-                // mPosY += y - lastTouchY
-
 
                 //invalidate()  -> this cancels animations going on I think?
 
@@ -54,6 +69,7 @@ class GestureDetector(private val listener: AnimationPromptListener) : View.OnTo
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 currentPointer = null
+                startingPointerY = null
             }
             MotionEvent.ACTION_POINTER_UP -> {
                 // This is if your first finger raises but other fingers continue to move around. Probably don't need to even include this section?
@@ -73,4 +89,7 @@ class GestureDetector(private val listener: AnimationPromptListener) : View.OnTo
         }
         return true
     }
+
+    // uses creepSpinnerOptionstext's visibility as a marker for whether or not constraintLayoutBottom should be able to animate
+    private fun isUiExpanded(): Boolean = viewGroup.creepSpinnerOptionsText.visibility == View.VISIBLE
 }

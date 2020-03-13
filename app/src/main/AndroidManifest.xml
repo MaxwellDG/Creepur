@@ -4,9 +4,10 @@
     package="com.portfolio.creepur">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:allowBackup="true"
+        android:name=".core.MainApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -17,7 +18,9 @@
         <activity android:name=".views.BookMarks" />
         <activity
             android:name=".views.HomePage"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".views.LoginActivity">
             <intent-filter>

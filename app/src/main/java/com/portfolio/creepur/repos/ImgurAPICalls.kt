@@ -20,4 +20,15 @@ interface ImgurAPICalls {
     //get most recent Images posted to a gallery
     @GET("3/account/{username}/submissions/{page}/authorize?")
     fun getImages(@Path("username") username: String, @Path("page")page: Int, @Query("client_id")client_id: String): Call<DataResponseImages>
+
+
+
+    //To-Do: Finish the 2 below
+    // get most recent favorites
+    @GET("/3/account/{username}/favorites/{page}")
+    fun getFavourites(@Path("username") username: String, @Path("page") page: Int, @Query("accessToken") accessToken: String)
+
+    // get best comments made by user
+    @GET("3/account/{username}/comments/best/0")
+    fun getComments(@Path("username") username: String, @Query("accessToken") accessToken: String)
 }

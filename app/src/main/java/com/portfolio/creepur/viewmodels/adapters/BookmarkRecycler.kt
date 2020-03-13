@@ -70,6 +70,6 @@ class BookmarkViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
 
         val requestOptions = RequestOptions().placeholder(R.drawable.ic_person_outline_black_24dp)
             .error(R.drawable.ic_person_outline_black_24dp)
-        Glide.with(itemView.context).applyDefaultRequestOptions(requestOptions).load(bookmark.avatar).into(image) //TODO: check if setDefaultRequestOptions is better
+        Glide.with(itemView.context).applyDefaultRequestOptions(requestOptions).load(bookmark.avatar).into(image)
     }
 }

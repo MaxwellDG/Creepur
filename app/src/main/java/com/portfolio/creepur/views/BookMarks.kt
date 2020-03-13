@@ -1,5 +1,6 @@
 package com.portfolio.creepur.views
 
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,9 +16,11 @@ import com.portfolio.creepur.viewmodels.BookmarksViewModel
 import com.portfolio.creepur.viewmodels.adapters.BookmarkRecycler
 import com.portfolio.creepur.viewmodels.adapters.BookmarkRecyclerItemTouch
 import com.portfolio.creepur.viewmodels.listeners.NavigationItemSelected
+import kotlinx.android.synthetic.main.activity_account.*
 import kotlinx.android.synthetic.main.activity_book_marks.*
 import kotlinx.android.synthetic.main.activity_book_marks.bottomNavigationView
 import kotlinx.android.synthetic.main.activity_home_page.*
+import kotlinx.android.synthetic.main.segment_bookmark.*
 
 class BookMarks : AppCompatActivity() {
 
@@ -34,7 +37,8 @@ class BookMarks : AppCompatActivity() {
 
         viewModel.getBookmarks().observe(this, Observer<ArrayList<Bookmark>> { adapter.setNewData(it) })
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(NavigationItemSelected(this, intent.getSerializableExtra("ACCOUNT") as UserAccountSignedIn))
+        bottomNavigationView.setOnNavigationItemSelectedListener(NavigationItemSelected
+            (bottomNavigationView,this, intent?.getSerializableExtra("ACCOUNT") as UserAccountSignedIn?))
     }
 
     private fun init(){
@@ -44,6 +48,12 @@ class BookMarks : AppCompatActivity() {
         item.attachToRecyclerView(bookmarkRecycler)
         viewModel.loadDataSet()
         bottomNavigationView.menu.getItem(2).isChecked = true
+
+        val animations: AnimationDrawable = conLayBookmark.background as AnimationDrawable
+        animations.setEnterFadeDuration(4000)
+        animations.setExitFadeDuration(4000)
+        animations.start()
+
     }
 }
 
